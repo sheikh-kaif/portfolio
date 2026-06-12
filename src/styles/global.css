@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #0d0f14;
+  --bg2:     #13161e;
+  --bg3:     #1a1e28;
+  --accent:  #4f8ef7;
+  --accent2: #7eb3ff;
+  --text:    #e8eaf0;
+  --muted:   #7a8099;
+  --border:  rgba(255,255,255,0.07);
+  --card:    rgba(255,255,255,0.04);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans:  'Outfit', sans-serif;
+  --mono:  'DM Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp  { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+@keyframes pulse   { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+@keyframes slideLine { 0% { left:-100%; } 50% { left:100%; } 100% { left:100%; } }
+
+/* ── Scroll-reveal ── */
+.fade-section { opacity:0; transform:translateY(28px); transition:opacity .7s ease,transform .7s ease; }
+.fade-section.visible { opacity:1; transform:translateY(0); }
+
+/* ── Skill bar ── */
+.skill-bar { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:2px; transform-origin:left; transform:scaleX(0); transition:transform 1s cubic-bezier(.4,0,.2,1); }
+.skill-bar.animate { transform:scaleX(1); }
+.skill-card:hover { border-color:rgba(79,142,247,.3) !important; transform:translateY(-2px); }
+
+/* ── Project card ── */
+.project-card:hover { border-color:rgba(79,142,247,.25) !important; transform:translateY(-3px); }
+.project-card:hover .project-accent-line { opacity:1 !important; }
+.project-card:hover .project-arrow { color:var(--accent) !important; transform:translate(2px,-2px); }
+
+/* ── Misc ── */
+.scroll-line-inner { position:absolute; top:0; left:-100%; width:100%; height:100%; background:var(--accent); animation:slideLine 2s 1.5s infinite; }
+.footer-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
+input:focus, textarea:focus { border-color:rgba(79,142,247,.45) !important; outline:none; }
+input::placeholder, textarea::placeholder { color:rgba(122,128,153,.6); }
+.nav-link:hover { color:var(--text) !important; }
+.contact-link:hover { color:var(--text) !important; }
+.floating-tag { opacity:0; animation:fadeIn 1s forwards; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════════ */
+
+/* Tablet ≤ 768px */
+@media (max-width: 768px) {
+  /* Navbar */
+  .nav-inner { flex-wrap: wrap; gap: .75rem; }
+  .nav-links  { gap: 1.2rem; }
+
+  /* Hero: stack vertically */
+  .hero-wrap { flex-direction: column !important; padding: 5rem 1.5rem 3rem !important; min-height: auto !important; gap: 2.5rem !important; }
+  .hero-left { max-width: 100% !important; text-align: center; }
+  .hero-actions { justify-content: center; }
+  .hero-right { width: 100% !important; flex: unset !important; }
+  .hero-scroll { display: none !important; }
+  .floating-tag { display: none !important; }
+
+  /* About grid */
+  .about-grid { grid-template-columns: 1fr !important; }
+
+  /* Skills grid: 2 cols */
+  .skills-grid { grid-template-columns: repeat(2,1fr) !important; }
+
+  /* Projects grid: 1 col */
+  .projects-grid { grid-template-columns: 1fr !important; }
+
+  /* Contact inner */
+  .contact-inner { grid-template-columns: 1fr !important; padding: 2rem !important; }
+
+  /* Footer */
+  .footer-inner { padding: 1.5rem !important; }
+
+  /* Section padding */
+  .port-section { padding: 3.5rem 1.5rem !important; }
+}
+
+/* Mobile ≤ 480px */
+@media (max-width: 480px) {
+  .nav-inner { padding: .85rem 1.25rem; }
+  .nav-links  { gap: .9rem; }
+  .nav-links span { font-size: 11px !important; }
+
+  .hero-wrap { padding: 4.5rem 1.25rem 2.5rem !important; }
+  .hero-character svg { width: 220px !important; height: 316px !important; }
+
+  /* Skills: 1 col on very small screens */
+  .skills-grid { grid-template-columns: 1fr !important; }
+
+  .contact-inner { padding: 1.5rem !important; }
+  .footer-inner { flex-direction: column; gap: .75rem; align-items: center; }
+}
